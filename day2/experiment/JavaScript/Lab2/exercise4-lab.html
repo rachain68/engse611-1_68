@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>คำนวณภาษีด้วย Arrow Function</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧮 โปรแกรมคำนวณภาษี (VAT 7%)</h2>
+
+  <label for="price">กรอกราคาสินค้า (บาท):</label><br>
+  <input type="text" id="price" placeholder="เช่น 100.00"><br>
+
+  <button onclick="calculateTax()">คำนวณภาษี</button>
+
+  <p id="result"></p>
+
+  <script>
+    // ✅ Arrow Function สำหรับคำนวณภาษี
+    const calculateVAT = price => price * 0.07;
+
+    const calculateTax = () => {
+      const priceInput = document.getElementById("price").value;
+      const price = parseFloat(priceInput);
+
+      if (isNaN(price)) {
+        console.warn("❌ ราคาที่กรอกไม่ถูกต้อง:", priceInput);
+        document.getElementById("result").innerText = "กรุณากรอกราคาที่ถูกต้อง";
+        return;
+      }
+
+      const vat = calculateVAT(price);
+      const total = price + vat;
+
+      // ✅ แสดงผลใน Console
+      console.log("ราคาสินค้า:", price.toFixed(2));
+      console.log("ภาษี (7%):", vat.toFixed(2));
+      console.log("ราคารวม:", total.toFixed(2));
+
+      document.getElementById("result").innerHTML = `
+        ราคาสินค้า: ${price.toFixed(2)} บาท<br>
+        ภาษี (7%): ${vat.toFixed(2)} บาท<br>
+        ราคารวม: ${total.toFixed(2)} บาท
+      `;
+    };
+  </script>
+</body>
+</html>

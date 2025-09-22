@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Object ซ้อน Object Interactive</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, button { margin: 5px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>ตัวอย่าง Object ซ้อน Object (Nested Object)</h1>
+  <div>
+    <label>ชื่อ:</label>
+    <input type="text" id="nameInput" placeholder="ชื่อ">
+    <label>อายุ:</label>
+    <input type="number" id="ageInput" placeholder="อายุ">
+    <label>เมือง:</label>
+    <input type="text" id="cityInput" placeholder="เมือง">
+    <button onclick="addPerson()">เพิ่ม</button>
+    <button onclick="removePerson()">ลบ (ตามชื่อ)</button>
+    <button onclick="showAll()">แสดงข้อมูลทั้งหมด</button>
+    <br>
+    <label>ค้นหาตามชื่อ:</label>
+    <input type="text" id="searchInput" placeholder="ชื่อที่ต้องการค้นหา">
+    <button onclick="searchPerson()">ค้นหา</button>
+    <button onclick="showLastAdded()">แสดงข้อมูลที่เพิ่มล่าสุด</button>
+  </div>
+  <pre id="output"></pre>
+
+  <script>
+    // เก็บข้อมูลเป็น Array ของ Object ซ้อน Object
+    let people = [
+      {
+        name: "สมชาย",
+        age: 30,
+        address: {
+          city: "เชียงใหม่",
+          country: "ไทย"
+        },
+        job: {
+          title: "วิศวกร",
+          company: "Tech Co.",
+          getJobInfo: function() {
+            return `${this.title} ที่บริษัท ${this.company}`;
+          }
+        },
+        introduce: function() {
+          return `สวัสดี ผมชื่อ ${this.name} อายุ ${this.age} ปี อยู่ที่ ${this.address.city}`;
+        }
+      }
+    ];
+
+    function addPerson() {
+      const name = document.getElementById("nameInput").value.trim();
+      const age = parseInt(document.getElementById("ageInput").value);
+      const city = document.getElementById("cityInput").value.trim();
+
+      if (!name || isNaN(age) || !city) {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return;
+      }
+
+      // สร้าง Object ใหม่
+      const newPerson = {
+        name: name,
+        age: age,
+        address: {
+          city: city,
+          country: "ไทย"
+        },
+        job: {
+          title: "ไม่ระบุ",
+          company: "ไม่ระบุ",
+          getJobInfo: function() {
+            return `${this.title} ที่บริษัท ${this.company}`;
+          }
+        },
+        introduce: function() {
+          return `สวัสดี ผมชื่อ ${this.name} อายุ ${this.age} ปี อยู่ที่ ${this.address.city}`;
+        }
+      };
+
+      people.push(newPerson);
+      showLastAdded();
+    }
+
+    function removePerson() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) {
+        alert("กรุณากรอกชื่อที่ต้องการลบ");
+        return;
+      }
+      const index = people.findIndex(person => person.name === name);
+      if (index !== -1) {
+        people.splice(index, 1);
+        showAll();
+      } else {
+        alert("ไม่พบชื่อที่ต้องการลบ");
+      }
+    }
+
+    function showAll() {
+      let text = "";
+      people.forEach((person, idx) => {
+        text += `#${idx + 1}\n`;
+        text += `ชื่อ: ${person.name}\n`;
+        text += `อายุ: ${person.age}\n`;
+        text += `ที่อยู่: ${person.address.city}, ${person.address.country}\n`;
+        text += `แนะนำตัว: ${person.introduce()}\n`;
+        text += `ข้อมูลงาน: ${person.job.getJobInfo()}\n`;
+        text += `----------------------\n`;
+      });
+      document.getElementById("output").innerText = text || "ยังไม่มีข้อมูล";
+    }
+
+    function showLastAdded() {
+      if (people.length === 0) {
+        document.getElementById("output").innerText = "ยังไม่มีข้อมูล";
+        return;
+      }
+      const person = people[people.length - 1];
+      let text = `ข้อมูลที่เพิ่มล่าสุด\n`;
+      text += `ชื่อ: ${person.name}\n`;
+      text += `อายุ: ${person.age}\n`;
+      text += `ที่อยู่: ${person.address.city}, ${person.address.country}\n`;
+      text += `แนะนำตัว: ${person.introduce()}\n`;
+      text += `ข้อมูลงาน: ${person.job.getJobInfo()}\n`;
+      document.getElementById("output").innerText = text;
+    }
+
+    function searchPerson() {
+      const searchName = document.getElementById("searchInput").value.trim();
+      if (!searchName) {
+        alert("กรุณากรอกชื่อที่ต้องการค้นหา");
+        return;
+      }
+      const found = people.filter(person => person.name === searchName);
+      if (found.length === 0) {
+        document.getElementById("output").innerText = `ไม่พบข้อมูลของ "${searchName}"`;
+        return;
+      }
+      let text = "";
+      found.forEach((person, idx) => {
+        text += `#${idx + 1}\n`;
+        text += `ชื่อ: ${person.name}\n`;
+        text += `อายุ: ${person.age}\n`;
+        text += `ที่อยู่: ${person.address.city}, ${person.address.country}\n`;
+        text += `แนะนำตัว: ${person.introduce()}\n`;
+        text += `ข้อมูลงาน: ${person.job.getJobInfo()}\n`;
+        text += `----------------------\n`;
+      });
+      document.getElementById("output").innerText = text;
+    }
+
+    // แสดงข้อมูลเริ่มต้น
+    showAll();
+  </script>
+</body>
+</html>
