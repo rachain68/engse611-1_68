@@ -39,6 +39,7 @@ p {
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
+
 /* Header Styling */
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -77,6 +78,7 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* Main Content */
 main {
     max-width: 1000px;
@@ -206,6 +208,7 @@ main {
     margin: 3rem auto;
     padding: 0 1rem; /* ลด padding บนมือถือ */
 }
+
 /* Tablet Styles (768px and down) */
 @media (max-width: 768px) {
     /* Header adjustments */
