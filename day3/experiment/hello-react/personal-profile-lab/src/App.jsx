@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import ProfileCard from './ProfileCard';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // ข้อมูลโปรไฟล์ตัวอย่าง
+  const sampleProfile = {
+    name: "ราเชนทร์ มะโนชัย",
+    studentId: "66130500001",
+    major: "วิศวกรรมซอฟต์แวร์",
+    year: 1,
+    age: 33,
+    gpa: 3.75,
+    email: "rachain_ma@live.rmult.ac.th",
+    hobbies: [
+      "เขียนโค้ด",
+      "เล่นเกม",
+      "ดูหนัง",
+      "ฟังเพลง",
+      "อ่านหนังสือ"
+    ],
+    skills: [
+      "JavaScript",
+      "React.js",
+      "HTML/CSS",
+      "Python",
+      "Git",
+      "Node.js"
+    ],
+    // TODO: นักศึกษาจะเพิ่ม fields เพิ่มเติมใน Challenge
+    socialLinks: [
+      { platform: "GitHub", url: "https://git@github.com:rachain68/engse611-1_68.git" },
+      { platform: "LinkedIn", url: "https://linkedin.com/in/yourusername" },
+      { platform: "Instagram", url: "https://instagram.com/yourusername" },
+      // เพิ่มเติมตามต้องการ
+    ]
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(45deg, #f0f2f5 0%, #e8eaf6 100%)',
+      padding: '20px'
+    }}>
+      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <h1 style={{
+          color: '#333',
+          fontSize: '32px',
+          margin: '20px 0'
+        }}>
+          🎓 Personal Profile Card
+        </h1>
+        <p style={{ color: '#666', fontSize: '16px' }}>
+          Lab 3.1 - ทำความรู้จักกับ React.js และ JSX
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <ProfileCard profile={sampleProfile} />
+    </div>
+  );
 }
 
-export default App
+export default App;
