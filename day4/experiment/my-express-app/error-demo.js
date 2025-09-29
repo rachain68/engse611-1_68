@@ -8,26 +8,26 @@ app.get('/api/divide/:a/:b', (req, res, next) => {
     try {
         const a = parseFloat(req.params.a);
         const b = parseFloat(req.params.b);
-        
+
         if (isNaN(a) || isNaN(b)) {
             const error = new Error('กรุณาใส่ตัวเลข');
             error.status = 400;
             throw error;
         }
-        
+
         if (b === 0) {
             const error = new Error('ไม่สามารถหารด้วยศูนย์ได้');
             error.status = 400;
             throw error;
         }
-        
+
         const result = a / b;
-        res.json({ 
+        res.json({
             success: true,
             calculation: `${a} ÷ ${b} = ${result}`,
-            result: result 
+            result: result
         });
-        
+
     } catch (error) {
         next(error); // ส่งต่อไป error handler
     }
@@ -43,10 +43,10 @@ app.get('/api/crash', (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('💥 Error:', err.message);
-    
+
     const statusCode = err.status || 500;
     const message = err.message || 'เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์';
-    
+
     res.status(statusCode).json({
         success: false,
         error: message,
