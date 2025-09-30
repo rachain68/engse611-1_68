@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food API Demo</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .endpoint { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        #result { background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 20px; white-space: pre-wrap; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .endpoint {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
     </style>
 </head>
+
 <body>
     <h1>🍜 Food API Demo</h1>
-    
+
     <div class="endpoint">
         <h3>ทดสอบ API Endpoints:</h3>
+        <button onclick="testAPI('/api/docs')">เอกสารแนะนำ</button>
         <button onclick="testAPI('/api/foods')">ดูเมนูทั้งหมด</button>
         <button onclick="testAPI('/api/foods?search=ผัด')">ค้นหา "ผัด"</button>
         <button onclick="testAPI('/api/foods?category=แกง')">หมวดแกง</button>
         <button onclick="testAPI('/api/foods?vegetarian=true')">อาหารมังสวิรัติ</button>
         <button onclick="testAPI('/api/foods/1')">เมนู ID 1</button>
         <button onclick="testAPI('/api/stats')">สถิติ</button>
+        <button onclick="testAPI('/api/foods/random')">สุ่มเมนู</button>
     </div>
-    
+
     <div id="result">คลิกปุ่มเพื่อทดสอบ API</div>
-    
+
     <script>
         async function testAPI(endpoint) {
             try {
@@ -40,4 +73,5 @@
         }
     </script>
 </body>
+
 </html>

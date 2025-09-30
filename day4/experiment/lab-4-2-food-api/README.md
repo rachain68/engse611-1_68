@@ -1,8 +1,8 @@
 # Food API
 
-A simple Node.js-based REST API for managing and querying Thai food data, built with Express.js. This API supports searching and filtering food items based on various criteria such as name, category, spiciness, vegetarian status, availability, and price.
+API แบบ REST ที่พัฒนาด้วย Node.js และ Express.js สำหรับจัดการและค้นหาข้อมูลอาหารไทย รองรับการค้นหาและกรองข้อมูลตามชื่อ, หมวดหมู่, ระดับความเผ็ด, สถานะมังสวิรัติ, ความพร้อมให้บริการ, และราคา
 
-## Project Structure
+## โครงสร้างโปรเจกต์
 
 ```
 lab-4-2-food-api/
@@ -19,42 +19,40 @@ lab-4-2-food-api/
     └── index.html
 ```
 
-## Setup Instructions
+## ขั้นตอนการติดตั้ง
 
-1. **Prerequisites**
-   - Node.js (v14 or higher)
+1. **ความต้องการของระบบ**
+   - Node.js (เวอร์ชัน 14 หรือสูงกว่า)
    - npm (Node Package Manager)
 
-2. **Installation**
+2. **การติดตั้ง**
    ```bash
-   # Clone the repository (if applicable)
-   git clone <repository-url>
    cd lab-4-2-food-api
 
-   # Install dependencies
+   # ติดตั้ง dependencies
    npm install
    ```
 
-3. **Running the API**
+3. **รัน API**
    ```bash
    npm start
    ```
-   The server will run on `http://localhost:3000` by default. You can change the port by setting the `PORT` environment variable.
+   เซิร์ฟเวอร์จะทำงานที่ `http://localhost:3000` โดยค่าเริ่มต้น สามารถเปลี่ยนพอร์ตได้โดยตั้งค่า environment variable `PORT`
 
-4. **Accessing the API**
-   - API root: `http://localhost:3000/`
-   - Documentation: `http://localhost:3000/api/docs`
-   - Food endpoints: `http://localhost:3000/api/foods`
+4. **การเข้าถึง API**
+   - หน้าแรก: `http://localhost:3000/`
+   - เอกสาร API: `http://localhost:3000/api/docs`
+   - Endpoints อาหาร: `http://localhost:3000/api/foods`
 
-## API Endpoints
+## Endpoints ของ API
 
 ### GET `/`
-Returns a welcome message with available endpoints.
+ส่งคืนข้อความต้อนรับพร้อมรายการ endpoints ที่ใช้งานได้
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
-  "message": "🍜 Welcome to Food API!",
+  "message": "🍜 ยินดีต้อนรับสู่ Food API!",
   "version": "1.0.0",
   "endpoints": {
     "foods": "/api/foods",
@@ -68,22 +66,22 @@ Returns a welcome message with available endpoints.
 ```
 
 ### GET `/api/foods`
-Retrieves a list of foods with optional filtering.
+ดึงรายการอาหารทั้งหมดพร้อมตัวเลือกการกรอง
 
 **Query Parameters**:
-- `search`: Search by food name or description (case-insensitive).
-- `category`: Filter by food category (e.g., "แกง", "ยำ").
-- `maxSpicy`: Filter foods with spiciness level up to the specified value (e.g., `3`).
-- `vegetarian`: Filter vegetarian foods (`true` or `false`).
-- `available`: Filter available foods (`true` or `false`).
-- `maxPrice`: Filter foods with price up to the specified value.
+- `search`: ค้นหาจากชื่อหรือคำอธิบายอาหาร (ไม่สนใจตัวพิมพ์ใหญ่-เล็ก)
+- `category`: กรองตามหมวดหมู่ (เช่น "แกง", "ยำ")
+- `maxSpicy`: กรองอาหารที่มีระดับความเผ็ดไม่เกินค่าที่ระบุ (เช่น `3`)
+- `vegetarian`: กรองอาหารมังสวิรัติ (`true` หรือ `false`)
+- `available`: กรองอาหารที่พร้อมเสิร์ฟ (`true` หรือ `false`)
+- `maxPrice`: กรองอาหารที่มีราคาไม่เกินค่าที่ระบุ
 
-**Example**:
+**ตัวอย่าง**:
 ```
 GET /api/foods?category=แกง&maxSpicy=3&vegetarian=false
 ```
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
   "success": true,
@@ -114,14 +112,14 @@ GET /api/foods?category=แกง&maxSpicy=3&vegetarian=false
 ```
 
 ### GET `/api/foods/:id`
-Retrieves a specific food by its ID.
+ดึงข้อมูลอาหารตาม ID
 
-**Example**:
+**ตัวอย่าง**:
 ```
 GET /api/foods/1
 ```
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
   "success": true,
@@ -141,14 +139,14 @@ GET /api/foods/1
 ```
 
 ### GET `/api/foods/category/:category`
-Retrieves all foods in a specific category.
+ดึงอาหารทั้งหมดในหมวดหมู่ที่ระบุ
 
-**Example**:
+**ตัวอย่าง**:
 ```
 GET /api/foods/category/ยำ
 ```
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
   "success": true,
@@ -172,9 +170,9 @@ GET /api/foods/category/ยำ
 ```
 
 ### GET `/api/foods/random`
-Returns a random food item.
+ส่งคืนอาหาร 1 รายการแบบสุ่ม
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
   "success": true,
@@ -194,12 +192,12 @@ Returns a random food item.
 ```
 
 ### GET `/api/docs`
-Returns API documentation with endpoint details.
+ส่งคืนเอกสาร API พร้อมรายละเอียด endpoints
 
 ### GET `/api/stats`
-Returns statistics about the food data (total foods, category counts, etc.).
+ส่งคืนสถิติเกี่ยวกับข้อมูลอาหาร เช่น จำนวนเมนูทั้งหมด, จำนวนตามหมวดหมู่, เป็นต้น
 
-**Response Example**:
+**ตัวอย่าง Response**:
 ```json
 {
   "totalFoods": 5,
@@ -223,9 +221,9 @@ Returns statistics about the food data (total foods, category counts, etc.).
 }
 ```
 
-## Error Handling
+## การจัดการข้อผิดพลาด
 
-- **404 Not Found**: Returned when an endpoint or resource is not found.
+- **404 Not Found**: ส่งคืนเมื่อไม่พบ endpoint หรือข้อมูล
   ```json
   {
     "success": false,
@@ -233,34 +231,34 @@ Returns statistics about the food data (total foods, category counts, etc.).
     "requestedUrl": "/invalid-route"
   }
   ```
-- **500 Internal Server Error**: Returned when there's an error processing the request.
+- **500 Internal Server Error**: ส่งคืนเมื่อเกิดข้อผิดพลาดในการประมวลผล
 
 ## Dependencies
 
 - express
 - cors
-- fs (Node.js built-in)
-- path (Node.js built-in)
+- fs (built-in ใน Node.js)
+- path (built-in ใน Node.js)
 
-## Notes
+## หมายเหตุ
 
-- The API uses `foods.json` as the data source, located in the `data/` directory.
-- All filtering is case-insensitive for `search` and `category` parameters.
-- The API includes a logger middleware (`middleware/logger.js`) to log requests.
-- Static files are served from the `public/` directory, including `index.html`.
+- API ใช้ `foods.json` ในโฟลเดอร์ `data/` เป็นแหล่งข้อมูล
+- การกรองทั้งหมดไม่สนใจตัวพิมพ์ใหญ่-เล็กสำหรับ `search` และ `category`
+- มี middleware `logger` (`middleware/logger.js`) สำหรับบันทึกข้อมูลคำขอ
+- ไฟล์ static เช่น `index.html` เสิร์ฟจากโฟลเดอร์ `public/`
 
-## Testing the API
+## การทดสอบ API
 
-You can test the API using tools like:
+สามารถทดสอบ API ได้ด้วยเครื่องมือ เช่น:
 - Postman
 - cURL
-- Browser (for GET requests)
+- เบราว์เซอร์ (สำหรับ GET requests)
 
-**Example cURL command**:
+**ตัวอย่างคำสั่ง cURL**:
 ```bash
 curl http://localhost:3000/api/foods?category=แกง&maxSpicy=3
 ```
 
-## Contributing
+## การมีส่วนร่วม
 
-Feel free to submit issues or pull requests to improve the API. Ensure any changes are tested and maintain the existing structure.
+หากต้องการปรับปรุง API สามารถส่ง issue หรือ pull request ได้ กรุณาทดสอบการเปลี่ยนแปลงให้ดีและรักษาโครงสร้างเดิมไว้

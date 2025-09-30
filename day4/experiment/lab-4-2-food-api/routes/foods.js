@@ -83,6 +83,33 @@ router.get('/', (req, res) => {
     }
 });
 
+// GET /api/foods/random - ดึงอาหารแบบสุ่ม 1 จาน
+router.get('/random', (req, res) => {
+    try {
+        const foods = loadFoods();
+        
+        if (foods.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'No foods available'
+            });
+        }
+        
+        const randomIndex = Math.floor(Math.random() * foods.length);
+        const randomFood = foods[randomIndex];
+        
+        res.json({
+            success: true,
+            data: randomFood
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching random food'
+        });
+    }
+});
+
 // GET /api/foods/:id - ดึงข้อมูลอาหารตาม ID
 router.get('/:id', (req, res) => {
     try {
@@ -136,33 +163,6 @@ router.get('/category/:category', (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Error fetching foods by category'
-        });
-    }
-});
-
-// GET /api/foods/random - ดึงอาหารแบบสุ่ม 1 จาน
-router.get('/random', (req, res) => {
-    try {
-        const foods = loadFoods();
-        
-        if (foods.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'No foods available'
-            });
-        }
-        
-        const randomIndex = Math.floor(Math.random() * foods.length);
-        const randomFood = foods[randomIndex];
-        
-        res.json({
-            success: true,
-            data: randomFood
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Error fetching random food'
         });
     }
 });
