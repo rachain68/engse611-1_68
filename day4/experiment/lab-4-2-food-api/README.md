@@ -194,6 +194,56 @@ GET /api/foods/category/ยำ
 ### GET `/api/docs`
 ส่งคืนเอกสาร API พร้อมรายละเอียด endpoints
 
+**ตัวอย่าง Response**:
+```json
+{
+  "title": "Food API Documentation",
+  "version": "1.0.0",
+  "description": "API สำหรับข้อมูลอาหารไทย พร้อมฟังก์ชันการค้นหาและกรองข้อมูล",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/foods",
+      "description": "ดึงข้อมูลอาหารทั้งหมด",
+      "queryParams": [
+        {
+          "name": "search",
+          "description": "ค้นหาตามชื่ออาหาร (เช่น ?search=ผัด)"
+        },
+        {
+          "name": "category",
+          "description": "กรองตามหมวดหมู่ (เช่น ?category=แกง)"
+        },
+        {
+          "name": "maxSpicy",
+          "description": "กรองตามระดับความเผ็ดสูงสุด (เช่น ?maxSpicy=3)"
+        },
+        {
+          "name": "vegetarian",
+          "description": "กรองอาหารมังสวิรัติ (true/false, เช่น ?vegetarian=true)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/foods/:id",
+      "description": "ดึงข้อมูลอาหารตาม ID (เช่น /api/foods/1)"
+    },
+    {
+      "method": "GET",
+      "path": "/api/docs",
+      "description": "ดึงเอกสาร API นี้"
+    },
+    {
+      "method": "GET",
+      "path": "/api/stats",
+      "description": "ดึงสถิติข้อมูลอาหาร"
+    }
+  ],
+  "notes": "API นี้ใช้ข้อมูลจาก foods.json และรองรับการค้นหาแบบ case-insensitive สำหรับ search และ category."
+}
+```
+
 ### GET `/api/stats`
 ส่งคืนสถิติเกี่ยวกับข้อมูลอาหาร เช่น จำนวนเมนูทั้งหมด, จำนวนตามหมวดหมู่, เป็นต้น
 
