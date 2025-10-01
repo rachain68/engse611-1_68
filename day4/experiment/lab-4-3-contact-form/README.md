@@ -12,7 +12,7 @@
 
 ## เทคโนโลยีที่ใช้
 - **Backend**: Node.js, Express.js
-- **Frontend**: HTML, CSS, JavaScript (vanilla)
+- **Frontend**: HTML, CSS, JavaScript
 - **Dependencies**: express, cors, express-rate-limit
 - **การเก็บข้อมูล**: JSON files (`data/contacts.json`, `data/feedback.json`)
 
@@ -38,7 +38,7 @@ lab-4-3-contact-form/
 ```
 
 ## การติดตั้ง
-1. **ติดตั้ง Node.js**: ตรวจสอบว่าได้ติดตั้ง Node.js (แนะนำ v14 หรือสูงกว่า)
+1. **ติดตั้ง Node.js**: ตรวจสอบว่าได้ติดตั้ง Node.js
 2. **Clone โปรเจ็กต์**:
    ```bash
    git clone <repository-url>
