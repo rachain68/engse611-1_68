@@ -4,7 +4,8 @@
     box-sizing: border-box;
 }
 
-body {
+/* Default Light Theme */
+body.light-theme {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
@@ -12,98 +13,101 @@ body {
     min-height: 100vh;
 }
 
-.container {
+body.light-theme .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background: #f9f9f9;
 }
 
-header {
+body.light-theme header {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: #5a67d8;
 }
 
-header h1 {
+body.light-theme header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
 }
 
-.forms-container {
+body.light-theme .forms-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     margin-bottom: 30px;
 }
 
-.form-section {
+body.light-theme .form-section {
     background: white;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.form-section h2 {
+body.light-theme .form-section h2 {
     color: #5a67d8;
     margin-bottom: 20px;
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 10px;
 }
 
-.form-group {
+body.light-theme .form-group {
     margin-bottom: 20px;
 }
 
-label {
+body.light-theme label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
     color: #4a5568;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
+body.light-theme input[type="text"],
+body.light-theme input[type="email"],
+body.light-theme input[type="tel"],
+body.light-theme textarea {
     width: 100%;
     padding: 12px;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
+    background: white;
+    color: #333;
 }
 
-input:focus,
-textarea:focus {
+body.light-theme input:focus,
+body.light-theme textarea:focus {
     outline: none;
     border-color: #5a67d8;
     box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
 }
 
-input.valid {
+body.light-theme input.valid {
     border-color: #38a169;
 }
 
-input.invalid {
+body.light-theme input.invalid {
     border-color: #e53e3e;
 }
 
-.rating-container {
+body.light-theme .rating-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-input[type="range"] {
+body.light-theme input[type="range"] {
     flex: 1;
 }
 
-#ratingValue {
+body.light-theme #ratingValue {
     font-weight: bold;
     color: #5a67d8;
 }
 
-button {
+body.light-theme button {
     background: linear-gradient(135deg, #5a67d8, #667eea);
     color: white;
     border: none;
@@ -115,86 +119,86 @@ button {
     transition: all 0.3s ease;
 }
 
-button:hover {
+body.light-theme button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(90, 103, 216, 0.3);
 }
 
-button:disabled {
+body.light-theme button:disabled {
     background: #a0aec0;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
 
-.error {
+body.light-theme .error {
     color: #e53e3e;
     font-size: 14px;
     margin-top: 5px;
     min-height: 20px;
 }
 
-.success {
+body.light-theme .success {
     color: #38a169;
     font-size: 14px;
     margin-top: 5px;
 }
 
-#statusMessages {
+body.light-theme #statusMessages {
     margin-bottom: 30px;
 }
 
-.status-message {
+body.light-theme .status-message {
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 10px;
     animation: slideIn 0.3s ease;
 }
 
-.status-message.success {
+body.light-theme .status-message.success {
     background: #c6f6d5;
     border: 1px solid #38a169;
     color: #1a202c;
 }
 
-.status-message.error {
+body.light-theme .status-message.error {
     background: #fed7d7;
     border: 1px solid #e53e3e;
     color: #1a202c;
 }
 
-.status-message.info {
+body.light-theme .status-message.info {
     background: #bee3f8;
     border: 1px solid #3182ce;
     color: #1a202c;
 }
 
-.api-section {
+body.light-theme .api-section {
     background: white;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.api-section h2 {
+body.light-theme .api-section h2 {
     color: #5a67d8;
     margin-bottom: 20px;
 }
 
-.api-buttons {
+body.light-theme .api-buttons {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
-.api-buttons button {
+body.light-theme .api-buttons button {
     background: linear-gradient(135deg, #38a169, #4fd1c7);
     font-size: 14px;
     padding: 10px 16px;
 }
 
-#apiResults {
+body.light-theme #apiResults {
     background: #f7fafc;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
@@ -206,6 +210,246 @@ button:disabled {
     font-size: 14px;
 }
 
+/* Dark Theme */
+body.dark-theme {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #e2e8f0;
+    background: linear-gradient(135deg, #2b2e4a 0%, #4a4066 100%);
+    min-height: 100vh;
+}
+
+body.dark-theme .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #2d2d2d;
+}
+
+body.dark-theme header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #e2e8f0;
+}
+
+body.dark-theme header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+body.dark-theme .forms-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+body.dark-theme .form-section {
+    background: #3a3a3a;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .form-section h2 {
+    color: #a3bffa;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4a5568;
+    padding-bottom: 10px;
+}
+
+body.dark-theme .form-group {
+    margin-bottom: 20px;
+}
+
+body.dark-theme label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #cbd5e0;
+}
+
+body.dark-theme input[type="text"],
+body.dark-theme input[type="email"],
+body.dark-theme input[type="tel"],
+body.dark-theme textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4a5568;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #2d2d2d;
+    color: #e2e8f0;
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus {
+    outline: none;
+    border-color: #a3bffa;
+    box-shadow: 0 0 0 3px rgba(163, 191, 250, 0.2);
+}
+
+body.dark-theme input.valid {
+    border-color: #68d391;
+}
+
+body.dark-theme input.invalid {
+    border-color: #fc8181;
+}
+
+body.dark-theme .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+body.dark-theme input[type="range"] {
+    flex: 1;
+}
+
+body.dark-theme #ratingValue {
+    font-weight: bold;
+    color: #a3bffa;
+}
+
+body.dark-theme button {
+    background: linear-gradient(135deg, #7f9cf5, #a3bffa);
+    color: #1a202c;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+body.dark-theme button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(163, 191, 250, 0.4);
+}
+
+body.dark-theme button:disabled {
+    background: #718096;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+body.dark-theme .error {
+    color: #fc8181;
+    font-size: 14px;
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+body.dark-theme .success {
+    color: #68d391;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+body.dark-theme #statusMessages {
+    margin-bottom: 30px;
+}
+
+body.dark-theme .status-message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+body.dark-theme .status-message.success {
+    background: #2f855a;
+    border: 1px solid #68d391;
+    color: #e2e8f0;
+}
+
+body.dark-theme .status-message.error {
+    background: #c53030;
+    border: 1px solid #fc8181;
+    color: #e2e8f0;
+}
+
+body.dark-theme .status-message.info {
+    background: #2b6cb0;
+    border: 1px solid #63b3ed;
+    color: #e2e8f0;
+}
+
+body.dark-theme .api-section {
+    background: #3a3a3a;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .api-section h2 {
+    color: #a3bffa;
+    margin-bottom: 20px;
+}
+
+body.dark-theme .api-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+body.dark-theme .api-buttons button {
+    background: linear-gradient(135deg, #68d391, #4fd1c7);
+    font-size: 14px;
+    padding: 10px 16px;
+    color: #1a202c;
+}
+
+body.dark-theme #apiResults {
+    background: #2d2d2d;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#themeToggle {
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #718096, #a0aec0);
+    transition: all 0.3s ease;
+}
+
+body.light-theme #themeToggle {
+    color: #1a202c;
+}
+
+body.dark-theme #themeToggle {
+    color: #e2e8f0;
+    background: linear-gradient(135deg, #4a5568, #718096);
+}
+
+#themeToggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -217,15 +461,16 @@ button:disabled {
     }
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .forms-container {
         grid-template-columns: 1fr;
     }
-    
+
     .api-buttons {
         flex-direction: column;
     }
-    
+
     .api-buttons button {
         width: 100%;
     }
