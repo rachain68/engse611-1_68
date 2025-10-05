@@ -51,10 +51,27 @@ const appendToJsonFile = async (filename, newData) => {
         const uniqueId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         // สร้าง timestamp ในเขตเวลา GMT+7
-        const date = new Date();
-        const offset = 7 * 60; // GMT+7 ในหน่วยนาที
-        const localDate = new Date(date.getTime() + offset * 60 * 1000);
-        const createdAt = localDate.toISOString().replace();
+            const makeOffsetIso = (date, offsetHours) => {
+                const offsetMs = offsetHours * 60 * 60 * 1000;
+                const local = new Date(date.getTime() + offsetMs);
+
+                const Lyyyy = local.getUTCFullYear();
+                const Lmm = String(local.getUTCMonth() + 1).padStart(2, '0');
+                const Ldd = String(local.getUTCDate()).padStart(2, '0');
+                const Lhh = String(local.getUTCHours()).padStart(2, '0');
+                const Lmin = String(local.getUTCMinutes()).padStart(2, '0');
+                const Lsec = String(local.getUTCSeconds()).padStart(2, '0');
+                const Lms = String(local.getUTCMilliseconds()).padStart(3, '0');
+
+                const sign = offsetHours >= 0 ? '+' : '-';
+                const absOffset = Math.abs(offsetHours);
+                const offHH = String(Math.floor(absOffset)).padStart(2, '0');
+                const offMM = String(Math.floor((absOffset - Math.floor(absOffset)) * 60)).padStart(2, '0');
+
+                return `${Lyyyy}-${Lmm}-${Ldd}T${Lhh}:${Lmin}:${Lsec}.${Lms}${sign}${offHH}:${offMM}`;
+            };
+
+            const createdAt = makeOffsetIso(new Date(), 7);
         
         // เพิ่ม ID และ timestamp ให้ข้อมูลใหม่
         const dataWithId = {

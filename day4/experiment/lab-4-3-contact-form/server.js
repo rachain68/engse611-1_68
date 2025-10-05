@@ -49,11 +49,40 @@ app.get('/api/status', async (req, res) => {
         const contacts = JSON.parse(contactsData);
         const feedback = JSON.parse(feedbackData);
         
-        // สร้าง timestamp ในเขตเวลา GMT+7
-        const date = new Date();
-        const offset = 7 * 60; // GMT+7 ในหน่วยนาที
-        const localDate = new Date(date.getTime() + offset * 60 * 1000);
-        const timestamp = localDate.toISOString().replace();
+        // Create timestamp in GMT+7. We compute the UTC time and then apply the
+        // +07:00 offset to produce an ISO-like string (YYYY-MM-DDTHH:mm:ss.sss+07:00).
+        const makeOffsetIso = (date, offsetHours) => {
+            // Get the UTC components for the moment
+            const yyyy = date.getUTCFullYear();
+            const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
+            const dd = String(date.getUTCDate()).padStart(2, '0');
+            const hh = String(date.getUTCHours()).padStart(2, '0');
+            const min = String(date.getUTCMinutes()).padStart(2, '0');
+            const sec = String(date.getUTCSeconds()).padStart(2, '0');
+            const ms = String(date.getUTCMilliseconds()).padStart(3, '0');
+
+            // Apply offset hours to the hour component and normalize date by
+            // creating a new Date from the UTC timestamp plus offset.
+            const offsetMs = offsetHours * 60 * 60 * 1000;
+            const local = new Date(date.getTime() + offsetMs);
+
+            const Lyyyy = local.getUTCFullYear();
+            const Lmm = String(local.getUTCMonth() + 1).padStart(2, '0');
+            const Ldd = String(local.getUTCDate()).padStart(2, '0');
+            const Lhh = String(local.getUTCHours()).padStart(2, '0');
+            const Lmin = String(local.getUTCMinutes()).padStart(2, '0');
+            const Lsec = String(local.getUTCSeconds()).padStart(2, '0');
+            const Lms = String(local.getUTCMilliseconds()).padStart(3, '0');
+
+            const sign = offsetHours >= 0 ? '+' : '-';
+            const absOffset = Math.abs(offsetHours);
+            const offHH = String(Math.floor(absOffset)).padStart(2, '0');
+            const offMM = String(Math.floor((absOffset - Math.floor(absOffset)) * 60)).padStart(2, '0');
+
+            return `${Lyyyy}-${Lmm}-${Ldd}T${Lhh}:${Lmin}:${Lsec}.${Lms}${sign}${offHH}:${offMM}`;
+        };
+
+        const timestamp = makeOffsetIso(new Date(), 7);
         
         res.json({
             success: true,
