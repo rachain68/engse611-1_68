@@ -46,10 +46,59 @@ app.use('/api/reviews', reviewRoutes);
 // - ใช้ Array.sort() และ Array.slice(0, 5) เพื่อหา top 5
 // - ระวัง: ร้านที่ยังไม่มีรีวิว (averageRating = 0) อาจมีปัญหาในการเรียง
 
+// GET /api/stats - สถิติทั้งหมด
 app.get('/api/stats', async (req, res) => {
   try {
-    // TODO: เขียนโค้ดที่นี่
+    // ขั้นตอนที่ 1: อ่านข้อมูลทั้งหมด
+    const restaurants = await readJsonFile('restaurants.json');
+    const reviews = await readJsonFile('reviews.json');
 
+    // ขั้นตอนที่ 2: คำนวณสถิติต่างๆ
+
+    // 2.1 จำนวนร้านทั้งหมด
+    const totalRestaurants = restaurants.length;
+
+    // 2.2 จำนวนรีวิวทั้งหมด
+    const totalReviews = reviews.length;
+
+    // 2.3 คะแนนเฉลี่ยรวมทุกร้าน
+    const totalRating = restaurants.reduce((sum, r) => sum + r.averageRating, 0);
+    const averageRating = totalRestaurants > 0
+      ? Math.round((totalRating / totalRestaurants) * 10) / 10
+      : 0;
+
+    // 2.4 ร้าน 5 อันดับแรกที่มี rating สูงสุด
+    const topRatedRestaurants = restaurants
+      .sort((a, b) => b.averageRating - a.averageRating)
+      .slice(0, 5)
+      .map(r => ({
+        id: r.id,
+        name: r.name,
+        category: r.category,
+        averageRating: r.averageRating,
+        totalReviews: r.totalReviews
+      }));
+
+    // 2.5 สถิติเพิ่มเติม
+    const categoryStats = {};
+    restaurants.forEach(r => {
+      if (!categoryStats[r.category]) {
+        categoryStats[r.category] = 0;
+      }
+      categoryStats[r.category]++;
+    });
+
+    // ขั้นตอนที่ 3: ส่งข้อมูลกลับ
+    res.json({
+      success: true,
+      data: {
+        totalRestaurants,
+        totalReviews,
+        averageRating,
+        topRatedRestaurants,
+        categoryStats // จำนวนร้านในแต่ละหมวด
+      }
+    });
   } catch (error) {
     console.error('Error fetching stats:', error);
     res.status(500).json({

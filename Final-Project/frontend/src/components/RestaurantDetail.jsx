@@ -16,15 +16,15 @@ function RestaurantDetail({ restaurantId, onBack }) {
     try {
       setLoading(true);
       setError(null);
-      
+
       // TODO 1: เรียก getRestaurantById
-      // const result = await getRestaurantById(restaurantId);
-      
+      const result = await getRestaurantById(restaurantId);
+
       // TODO 2: ตั้งค่า state
-      // if (result.success) {
-      //   setRestaurant(result.data);
-      // }
-      
+      if (result.success) {
+        setRestaurant(result.data);
+      }
+
     } catch (err) {
       setError('ไม่สามารถโหลดข้อมูลร้านได้');
       console.error(err);
@@ -47,7 +47,7 @@ function RestaurantDetail({ restaurantId, onBack }) {
       <button className="back-button" onClick={onBack}>
         ← กลับ
       </button>
-      
+
       <div className="detail-header">
         <img src={restaurant.image} alt={restaurant.name} />
         <div className="detail-info">
@@ -61,8 +61,8 @@ function RestaurantDetail({ restaurantId, onBack }) {
           </div>
           <div className="rating-info">
             <span className="rating">
-              ⭐ {restaurant.averageRating > 0 
-                ? restaurant.averageRating.toFixed(1) 
+              ⭐ {restaurant.averageRating > 0
+                ? restaurant.averageRating.toFixed(1)
                 : 'ยังไม่มีรีวิว'}
             </span>
             <span className="price">{'฿'.repeat(restaurant.priceRange)}</span>
@@ -71,11 +71,11 @@ function RestaurantDetail({ restaurantId, onBack }) {
         </div>
       </div>
 
-      <ReviewForm 
-        restaurantId={restaurantId} 
+      <ReviewForm
+        restaurantId={restaurantId}
         onReviewAdded={handleReviewAdded}
       />
-      
+
       <ReviewList reviews={restaurant.reviews || []} />
     </div>
   );
