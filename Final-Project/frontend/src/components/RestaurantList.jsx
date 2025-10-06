@@ -12,7 +12,9 @@ function RestaurantList({ onSelectRestaurant }) {
     search: '',
     category: '',
     minRating: '',
-    priceRange: ''
+    priceRange: '',
+    sortBy: '',
+    order: 'asc'
   });
 
   // 1. useEffect เพื่อ fetch ข้อมูลเมื่อ filters เปลี่ยน

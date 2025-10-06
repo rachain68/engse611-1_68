@@ -32,8 +32,36 @@ function FilterPanel({ onFilterChange, filters }) {
     onFilterChange({ priceRange: priceRange || '' })
   };
 
+  // Sorting handlers
+  const handleSortByChange = (sortBy) => {
+    onFilterChange({ sortBy: sortBy || '' });
+  };
+
+  const handleSortOrderChange = (order) => {
+    onFilterChange({ order: order || '' });
+  };
+
   return (
     <div className="filter-panel">
+      <div className="filter-group">     {/*  Sorting controls  */}
+        <label>เรียงตาม:</label>
+        <select value={filters.sortBy || ''} onChange={(e) => handleSortByChange(e.target.value)}>
+          <option value="">🔄ค่าเริ่มต้น</option>
+          <option value="name">🔤ตัวอักษร</option>
+          <option value="rating">👍ตัวเลือกแนะนำ</option>
+          <option value="price">💰ราคา</option>
+          <option value="reviews">💬รีวิว</option>
+        </select>
+      </div>
+
+      <div className="filter-group">
+        <label>จาก:</label>
+        <select value={filters.order || 'asc'} onChange={(e) => handleSortOrderChange(e.target.value)}>
+          <option value="asc">📉จากน้อยไปมาก</option>
+          <option value="desc">📈จากมากไปน้อย</option>
+        </select>
+      </div>
+
       <div className="filter-group">
         <label>หมวดหมู่:</label>
         <select
@@ -49,38 +77,36 @@ function FilterPanel({ onFilterChange, filters }) {
       {/* ========================================
           TODO 3: เพิ่ม filter สำหรับ minRating
           ======================================== */}
-     
+
       <div className="filter-group">
         <label>คะแนนขั้นต่ำ:</label>
-        <select 
+        <select
           value={filters.minRating || ''}
           onChange={(e) => handleRatingChange(e.target.value)}
         >
-          <option value="">ทั้งหมด</option>
-          <option value="4">4 ดาวขึ้นไป ⭐⭐⭐⭐</option>
-          <option value="3">3 ดาวขึ้นไป ⭐⭐⭐</option>
-          <option value="2">2 ดาวขึ้นไป ⭐⭐</option>
+          <option value="">🌟 ทั้งหมด</option>
+          <option value="4">⭐⭐⭐⭐ขึ้นไป</option>
+          <option value="3">⭐⭐⭐ขึ้นไป</option>
+          <option value="2">⭐⭐ขึ้นไป</option>
         </select>
       </div>
-    
-
       {/* ========================================
           TODO 4: เพิ่ม filter สำหรับ priceRange
           ======================================== */}
-     
+
       <div className="filter-group">
         <label>ช่วงราคา:</label>
-        <select 
+        <select
           value={filters.priceRange || ''}
           onChange={(e) => handlePriceChange(e.target.value)}
         >
-          <option value="">ทั้งหมด</option>
-          <option value="1">฿ (ไม่เกิน 100)</option>
-          <option value="2">฿฿ (100-300)</option>
-          <option value="3">฿฿฿ (มากกว่า 300)</option>
+          <option value="">💸ทุกช่วงราคา</option>
+          <option value="1">🪙ต่ำกว่า ฿100</option>
+          <option value="2">💵฿100 – ฿300</option>
+          <option value="3">💰มากกว่า ฿300</option>
         </select>
       </div>
-    
+
     </div>
   );
 }

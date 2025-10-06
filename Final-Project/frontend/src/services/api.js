@@ -14,6 +14,9 @@ export const getRestaurants = async (filters = {}) => {
     if (filters.category) queryParams.append('category', filters.category);
     if (filters.minRating) queryParams.append('minRating', filters.minRating);
     if (filters.priceRange) queryParams.append('priceRange', filters.priceRange);
+    // Sorting params
+    if (filters.sortBy) queryParams.append('sortBy', filters.sortBy);
+    if (filters.order) queryParams.append('order', filters.order);
 
     // TODO 2: สร้าง URL พร้อม query string
     const url = `${API_URL}/restaurants?${queryParams}`;
@@ -46,16 +49,10 @@ export const getRestaurantById = async (id) => {
     // ใช้ endpoint: `${API_URL}/restaurants/${id}`
     // ตรวจสอบ response.ok
     // return ข้อมูล JSON
-    const queryParams = new URLSearchParams();
-    if (id.search) queryParams.append('search', id.search);
-    if (id.category) queryParams.append('category', id.category);
-    if (id.minRating) queryParams.append('minRating', id.minRating);
-    if (id.priceRange) queryParams.append('priceRange', id.priceRange);
-
     const url = `${API_URL}/restaurants/${id}`;
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Failed to fetch restaurants');
+      throw new Error('Failed to fetch restaurant');
     }
     return await response.json();
 

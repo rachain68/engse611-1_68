@@ -7,8 +7,8 @@ const { readJsonFile } = require('../utils/fileManager');
 // ========================================
 router.get('/', async (req, res) => {
   try {
-    let restaurants = await readJsonFile('restaurants.json');
-    const { search, category, minRating, priceRange } = req.query;
+  let restaurants = await readJsonFile('restaurants.json');
+  const { search, category, minRating, priceRange, sortBy, order } = req.query;
 
     // 1. กรองตามชื่อ (search)
     if (search) {
@@ -29,8 +29,30 @@ router.get('/', async (req, res) => {
     }
 
     // 4. กรองตามช่วงราคา (priceRange)
+
     if (priceRange) {
       restaurants = restaurants.filter(r => r.priceRange === parseInt(priceRange));
+    }
+
+    // 5. การเรียงลำดับ (sorting) หากส่ง sortBy และ order
+    // sortBy: 'name' | 'rating' | 'price' | 'reviews'
+    // order: 'asc' | 'desc' (default 'asc')
+    if (sortBy) {
+      const sortOrder = (order && order.toLowerCase() === 'desc') ? -1 : 1;
+      restaurants = restaurants.slice().sort((a, b) => {
+        switch (sortBy) {
+          case 'name':
+            return a.name.localeCompare(b.name) * sortOrder;
+          case 'rating':
+            return (a.averageRating - b.averageRating) * sortOrder;
+          case 'price':
+            return (a.priceRange - b.priceRange) * sortOrder;
+          case 'reviews':
+            return ((a.totalReviews || 0) - (b.totalReviews || 0)) * sortOrder;
+          default:
+            return 0;
+        }
+      });
     }
 
     res.json({
@@ -41,7 +63,9 @@ router.get('/', async (req, res) => {
         search: search || null,
         category: category || null,
         minRating: minRating || null,
-        priceRange: priceRange || null
+        priceRange: priceRange || null,
+        sortBy: sortBy || null,
+        order: order || null
       }
     });
   } catch (error) {
