@@ -1,12 +1,27 @@
 # Restaurant Review Website
 
 ## รายละเอียดโปรเจค
-เว็บสำหรับรีวิวร้านอาหารขนาดเล็กที่ประกอบด้วย frontend (React + Vite) และ backend (Node.js + Express) โดยเก็บข้อมูลแบบ JSON file เหมาะสำหรับการสาธิตการทำ CRUD, การค้นหา และการกรองร้านอาหาร
+เว็บสำหรับรีวิวร้านอาหารขนาดเล็กที่ประกอบด้วย frontend (React + Vite) และ backend (Node.js + Express) โดยเก็บข้อมูลแบบ JSON file เหมาะสำหรับการสาธิตการทำ CRUD, การค้นหา/กรอง, การจัดการรีวิว และการคำนวณ rating อัตโนมัติ
 
 ## เทคโนโลยีที่ใช้
-- Frontend: React 18 + Vite
-- Backend: Node.js + Express
-- Database: JSON File Storage
+- Frontend: React 18 + Vite (โฟลเดอร์ `frontend/`) — UI สำหรับดูรายการร้าน ค้นหา กรอง ดูรายละเอียด และเพิ่มรีวิว
+- Backend: Node.js + Express (โฟลเดอร์ `backend/`) — REST API ที่เก็บข้อมูลเป็นไฟล์ JSON ใน `backend/data/`
+- Database: JSON File Storage 
+
+## โครงสร้างไฟล์สำคัญ
+- `backend/`
+  - `server.js` — ตั้งค่า Express app, routes และ endpoint `/api/stats`
+  - `routes/restaurants.js` — GET `/api/restaurants`, GET `/api/restaurants/:id`
+  - `routes/reviews.js` — GET `/api/reviews/:restaurantId`, POST `/api/reviews`
+  - `middleware/validation.js` — validate รีวิวก่อนบันทึก (ป้องกัน input ที่เป็นอันตราย)
+  - `utils/fileManager.js` — ฟังก์ชันอ่าน/เขียน JSON files
+  - `data/restaurants.json` — ข้อมูลร้าน
+  - `data/reviews.json` — ข้อมูลรีวิว
+
+- `frontend/`
+  - `src/App.jsx` — entry ของ React app, จัดการ theme และ routing แบบง่าย (list <-> detail)
+  - `src/services/api.js` — wrapper สำหรับเรียก REST API (getRestaurants, getRestaurantById, addReview)
+  - `src/components/` — `RestaurantList`, `RestaurantCard`, `RestaurantDetail`, `ReviewForm`, `ReviewList`, `SearchBar`, `FilterPanel`
 
 ## Features ที่ทำได้
 ### Required Features (70 คะแนน)
@@ -19,9 +34,9 @@
 - [x] อัพเดท rating อัตโนมัติ
 
 ### Bonus Features (ถ้ามี)
-- [ ] Sort restaurants
-- [ ] Responsive design
-- [ ] Animations
+- [x] Sort restaurants
+- [x] Responsive design
+- [x] Animations
 
 ## วิธีติดตั้งและรัน
 
@@ -48,7 +63,8 @@ npm run dev
 
 ## Screenshots
 ### หน้าแรก
-![Home](screenshots/home.png)
+![Home (Light mode)](screenshots/homelight.png)
+![Home (Dark mode)](screenshots/homedark.png)
 
 ### รายละเอียดร้าน
 ![Detail](screenshots/detail.png)
@@ -57,9 +73,9 @@ npm run dev
 ![Review](screenshots/review-form.png)
 
 ## ผู้พัฒนา
-- ราเชนทร์ มะโนชัย
-- 68543210084-8
-- rachain_ma@live.rmutl.ac.th
+- นาย ราเชนทร์ มะโนชัย
+- รหัสนักศึกษา: 68543210084-8
+- Email: rachain_ma@live.rmutl.ac.th
 
 ## License
 MIT License
