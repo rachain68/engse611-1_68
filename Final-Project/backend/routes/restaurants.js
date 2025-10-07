@@ -104,11 +104,19 @@ router.get('/:id', async (req, res) => {
       .filter(r => r.restaurantId === parseInt(id))     
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // ขั้นตอนที่ 5 :เรียงจากใหม่สุด
 
-    // ขั้นตอนที่ 6: ส่งข้อมูลกลับ
+    // คำนวณค่า averageRating และ totalReviews จากรีวิวจริง (ป้องกันความไม่สอดคล้องกับไฟล์ restaurants.json)
+    const totalReviews = restaurantReviews.length;
+    const averageRating = totalReviews > 0
+      ? Math.round((restaurantReviews.reduce((s, r) => s + Number(r.rating), 0) / totalReviews) * 10) / 10
+      : 0;
+
+    // ขั้นตอนที่ 6: ส่งข้อมูลกลับ (คืนค่า rating ที่คำนวณจากรีวิวจริง)
     res.json({
       success: true,
       data: {
         ...restaurant,
+        averageRating,
+        totalReviews,
         reviews: restaurantReviews
       }
     });

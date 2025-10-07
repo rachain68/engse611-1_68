@@ -52,8 +52,13 @@ router.post('/', validateReview, async (req, res) => {
     }
 
     // TODO 5: สร้างรีวิวใหม่
+    // เปลี่ยนจากการใช้ Date.now() เป็น id แบบเพิ่มทีละ 1 (max id + 1)
+    // หมายเหตุ: ถ้าไฟล์มี id ที่เป็น timestamp อยู่แล้ว ค่าใหม่จะต่อจากค่าสูงสุดนั้น
+    const maxId = reviews.length > 0 ? Math.max(...reviews.map(r => Number(r.id) || 0)) : 0;
+    const newId = maxId + 1;
+
     const newReview = {
-      id: Date.now(),
+      id: newId,
       restaurantId: parseInt(restaurantId),
       userName: userName.trim(),
       rating: parseInt(rating),
@@ -79,24 +84,27 @@ router.post('/', validateReview, async (req, res) => {
     //
     // 3. หา index ของร้าน (ไม่ใช่ object!)
     const restaurantIndex = restaurants.findIndex(r => r.id === parseInt(restaurantId));
-    //
-    // 4. อัพเดทค่าใน array
-    restaurants[restaurantIndex].averageRating = Math.round(newAverageRating * 10) / 10;
-    restaurants[restaurantIndex].totalReviews = restaurantReviews.length;
+    if (restaurantIndex !== -1) {
+      // 4. อัพเดทค่าใน array (ปัดทศนิยม 1 ตำแหน่ง)
+      restaurants[restaurantIndex].averageRating = Math.round(newAverageRating * 10) / 10;
+      restaurants[restaurantIndex].totalReviews = restaurantReviews.length;
+    }
     //
     // 5. บันทึกไฟล์
     await writeJsonFile('restaurants.json', restaurants);
 
     // TODO 8: ส่งข้อมูลกลับ
+    const updatedRestaurant = (restaurantIndex !== -1) ? restaurants[restaurantIndex] : restaurant;
+
     res.status(201).json({
       success: true,
       message: 'เพิ่มรีวิวสำเร็จ',
       data: newReview,
       restaurant: {
-        id: restaurant.id,
-        name: restaurant.name,
-        averageRating: restaurant.averageRating,
-        totalReviews: restaurant.totalReviews
+        id: updatedRestaurant.id,
+        name: updatedRestaurant.name,
+        averageRating: updatedRestaurant.averageRating,
+        totalReviews: updatedRestaurant.totalReviews
       }
     });
   } catch (error) {
