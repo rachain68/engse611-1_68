@@ -30,7 +30,7 @@ function SearchBar({ onSearch }) {
       if (searchTerm !== undefined) {
         onSearch(searchTerm);
       }
-    }, 100000); // 500ms delay
+    }, 500); // 500ms delay
     
     return () => clearTimeout(timer);
   }, [searchTerm, onSearch]);

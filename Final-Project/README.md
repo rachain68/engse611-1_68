@@ -24,7 +24,7 @@
   - `src/components/` — `RestaurantList`, `RestaurantCard`, `RestaurantDetail`, `ReviewForm`, `ReviewList`, `SearchBar`, `FilterPanel`
 
 ## Features ที่ทำได้
-### Required Features (70 คะแนน)
+### Required Features
 - [x] แสดงรายการร้านอาหาร
 - [x] ค้นหาร้าน
 - [x] กรองตามหมวด/rating/ราคา
@@ -33,7 +33,7 @@
 - [x] Validation
 - [x] อัพเดท rating อัตโนมัติ
 
-### Bonus Features (ถ้ามี)
+### Bonus Features
 - [x] Sort restaurants
 - [x] Responsive design
 - [x] Animations
@@ -63,7 +63,9 @@ npm run dev
 
 ## Screenshots
 ### หน้าแรก
+-   Light Mode
 ![Home (Light mode)](screenshots/homelight.png)
+-   Dark Mode
 ![Home (Dark mode)](screenshots/homedark.png)
 
 ### รายละเอียดร้าน
